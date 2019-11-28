@@ -1,11 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import GlobalStyles from "./GlobalStyles";
-
-const colors = {
-  base: "#00232E",
-  lining: "#46595A"
-};
+import colors from "./utils/colors";
+import Calculator from "./components/Calculator";
 
 const ContentWrapper = styled.div`
   width: 100vw;
@@ -15,12 +12,6 @@ const ContentWrapper = styled.div`
   align-items: center;
   justify-content: center;
   background: ${colors.base};
-`;
-
-const Calculator = styled.div`
-  width: 300px;
-  height: 500px;
-  border: solid ${colors.lining};
 `;
 
 function App() {

@@ -12,6 +12,10 @@ export default function GlobalStyles() {
         }
         body {
           margin: 0;
+          font-family: "Tomorrow", sans-serif;
+        }
+        h1 {
+          color: white;
         }
       `}
     />

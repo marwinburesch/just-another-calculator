@@ -18,20 +18,21 @@ export default function Calculator() {
   return (
     <Grid>
       <Display />
-      <NumberKey />
-      <NumberKey />
-      <NumberKey />
-      <ActionKey />
-      <NumberKey />
-      <NumberKey />
-      <NumberKey />
-      <ActionKey />
-      <NumberKey />
-      <NumberKey />
-      <NumberKey />
-      <ActionKey />
+      <NumberKey number={7} />
+      <NumberKey number={8} />
+      <NumberKey number={9} />
+      <ActionKey action={"/"} />
+      <NumberKey number={4} />
+      <NumberKey number={5} />
+      <NumberKey number={6} />
+      <ActionKey action={"x"} />
+      <NumberKey number={1} />
+      <NumberKey number={2} />
+      <NumberKey number={3} />
+      <ActionKey action={"-"} />
       <NumberKey number={0} />
-      <ActionKey />
+      <ActionKey action={"+"} />
+      <ActionKey action={"="} />
     </Grid>
   );
 }

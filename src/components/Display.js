@@ -8,6 +8,6 @@ const NumberDisplay = styled.div`
   box-shadow: inset 0 -3px 0 ${colors.darkAccent};
 `;
 
-export default function Display() {
-  return <NumberDisplay></NumberDisplay>;
+export default function Display({ value }) {
+  return <NumberDisplay>{value}</NumberDisplay>;
 }

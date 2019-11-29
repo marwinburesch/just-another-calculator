@@ -19,6 +19,7 @@ export default function Calculator() {
   const [firstNum, setFirstNum] = useState("");
   const [secondNum, setSecondNum] = useState("");
   const [nextHasBeenPressed, setNextHasBeenPressed] = useState(false);
+  const [result, setResult] = useState(null);
 
   console.log(firstNum);
   console.log(secondNum);
@@ -38,16 +39,16 @@ export default function Calculator() {
         setNextHasBeenPressed(true);
         break;
       case "+":
-        console.log(add(firstNum, secondNum));
+        setResult(add(firstNum, secondNum));
         break;
       case "-":
-        console.log(substract(firstNum, secondNum));
+        setResult(substract(firstNum, secondNum));
         break;
       case "x":
-        console.log(multiply(firstNum, secondNum));
+        setResult(multiply(firstNum, secondNum));
         break;
       case "/":
-        console.log(divide(firstNum, secondNum));
+        setResult(divide(firstNum, secondNum));
         break;
       default:
         console.log("press keys damnit");
@@ -56,7 +57,7 @@ export default function Calculator() {
 
   return (
     <Grid>
-      <Display />
+      <Display value={result} />
       <NumberKey number={7} onNumKeyPress={handleNumKeyPress} />
       <NumberKey number={8} onNumKeyPress={handleNumKeyPress} />
       <NumberKey number={9} onNumKeyPress={handleNumKeyPress} />

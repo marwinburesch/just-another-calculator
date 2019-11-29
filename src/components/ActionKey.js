@@ -17,7 +17,10 @@ const Key = styled.button`
 `;
 
 export default function ActionKey({ action }) {
+ fix/utilities
   let span = "";
+  let span = "span 1";
+ fix/utilities
   if (action === "next") {
     span = "span 4";
   }

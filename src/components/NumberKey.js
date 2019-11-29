@@ -10,7 +10,6 @@ const Key = styled.button`
   text-align: center;
   color: white;
   font-size: 30px;
-  line-height: 80px;
   user-select: none;
   &:active {
     transform: scale(0.95);
@@ -18,7 +17,7 @@ const Key = styled.button`
 `;
 
 export default function NumberKey({ number }) {
-  let span = "";
+  let span = "span 1";
   if (number === 0) {
     span = "span 3";
   }

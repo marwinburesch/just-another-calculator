@@ -10,7 +10,6 @@ const Key = styled.button`
   text-align: center;
   color: white;
   font-size: 30px;
-  line-height: 80px;
   user-select: none;
   &:active {
     transform: scale(0.95);

@@ -10,7 +10,6 @@ const Key = styled.button`
   text-align: center;
   color: white;
   font-size: 30px;
-  line-height: 80px;
   user-select: none;
   &:active {
     transform: scale(0.95);
@@ -19,7 +18,7 @@ const Key = styled.button`
 
 export default function ActionKey({ action }) {
   let span = "";
-  if (action === "=") {
+  if (action === "next") {
     span = "span 4";
   }
   return <Key span={span}>{action}</Key>;

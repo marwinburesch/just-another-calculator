@@ -19,7 +19,7 @@ function App() {
     <>
       <GlobalStyles />
       <ContentWrapper>
-        <h1> meep meep calculator...</h1>
+        <h1> cologne calc...</h1>
         <Calculator />
       </ContentWrapper>
     </>

@@ -25,7 +25,14 @@ export default function Calculator() {
 
   function getResult() {
     setResult(calculateResult(operator, firstNum, secondNum));
+    reset();
+  }
+
+  function reset() {
     setOperator(null);
+    setFirstNum("");
+    setSecondNum("");
+    setResult(null);
   }
 
   function handleNumKeyPress(value) {

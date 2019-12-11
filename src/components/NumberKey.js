@@ -16,19 +16,19 @@ const Key = styled.button`
   }
 `;
 
-export default function NumberKey({ number, onClick }) {
+export default function NumberKey({ value, onClick }) {
   let span = "span 1";
-  if (number === 0) {
+  if (value === 0) {
     span = "span 3";
   }
 
   function handleClick() {
-    onClick(number.toString());
+    onClick(value);
   }
 
   return (
     <Key span={span} onClick={handleClick}>
-      {number}
+      {value.toString()}
     </Key>
   );
 }

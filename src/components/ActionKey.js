@@ -18,7 +18,7 @@ const Key = styled.button`
 
 export default function ActionKey({ value, onClick }) {
   let span = "span 1";
-  if (value === "next") {
+  if (value === "=") {
     span = "span 4";
   }
 

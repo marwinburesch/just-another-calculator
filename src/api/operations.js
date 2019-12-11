@@ -1,16 +1,19 @@
-export function add(a, b) {
-  const result = parseInt(a) + parseInt(b);
-  return result;
-}
-export function substract(a, b) {
-  const result = parseInt(a) - parseInt(b);
-  return result;
-}
-export function multiply(a, b) {
-  const result = parseInt(a) * parseInt(b);
-  return result;
-}
-export function divide(a, b) {
-  const result = parseInt(a) / parseInt(b);
-  return result;
+export function calculateResult(operator, a, b) {
+  let result = null;
+  switch (operator) {
+    case "+":
+      result = parseInt(a) + parseInt(b);
+      return result;
+    case "-":
+      result = parseInt(a) - parseInt(b);
+      return result;
+    case "x":
+      result = parseInt(a) * parseInt(b);
+      return result;
+    case "/":
+      result = parseInt(a) / parseInt(b);
+      return result;
+    default:
+      return result;
+  }
 }

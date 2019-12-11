@@ -4,7 +4,7 @@ import colors from "../utils/colors";
 import Display from "./Display";
 import ActionKey from "./ActionKey";
 import NumberKey from "./NumberKey";
-import { calculateResult } from "../api/operations";
+import calculateResult from "../api/operations";
 
 const Grid = styled.div`
   width: 400px;
@@ -16,9 +16,9 @@ const Grid = styled.div`
 `;
 
 export default function Calculator() {
-  const [firstNum, setFirstNum] = useState("");
-  const [secondNum, setSecondNum] = useState("");
-  const [operator, setOperator] = useState(null);
+  const [firstNum, setFirstNum] = useState(0);
+  const [secondNum, setSecondNum] = useState(0);
+  const [operator, setOperator] = useState("");
   const [result, setResult] = useState(null);
 
   console.log(firstNum, operator, secondNum, result);
@@ -32,11 +32,14 @@ export default function Calculator() {
     setOperator(null);
     setFirstNum("");
     setSecondNum("");
-    setResult(null);
   }
 
   function handleNumKeyPress(value) {
-    operator ? setSecondNum(secondNum + value) : setFirstNum(firstNum + value);
+    if (operator) {
+      setSecondNum(secondNum * 10 + value);
+    } else {
+      setFirstNum(firstNum * 10 + value);
+    }
   }
 
   function handleActionKeyPress(key) {
@@ -48,18 +51,45 @@ export default function Calculator() {
       {/* display should show input,on getResult the result */}
       <Display>{result}</Display>
       {[7, 8, 9].map(value => (
-        <NumberKey key={value} value={value} onClick={handleNumKeyPress} />
+        <NumberKey
+          key={value}
+          value={value}
+          onClick={() => {
+            handleNumKeyPress(value);
+          }}
+        >
+          {value.toString()}
+        </NumberKey>
       ))}
       <ActionKey value={"/"} onClick={handleActionKeyPress} />
       {[4, 5, 6].map(value => (
-        <NumberKey key={value} value={value} onClick={handleNumKeyPress} />
+        <NumberKey
+          key={value}
+          value={value}
+          onClick={() => handleNumKeyPress(value)}
+        >
+          {value}
+        </NumberKey>
       ))}
-      <ActionKey value={"x"} onClick={handleActionKeyPress} />
+      <ActionKey value={"*"} onClick={handleActionKeyPress} />
       {[1, 2, 3].map(value => (
-        <NumberKey key={value} value={value} onClick={handleNumKeyPress} />
+        <NumberKey
+          key={value}
+          value={value}
+          onClick={() => handleNumKeyPress(value)}
+        >
+          {value}
+        </NumberKey>
       ))}
       <ActionKey value={"-"} onClick={handleActionKeyPress} />
-      <NumberKey key={0} value={0} onClick={handleNumKeyPress} />
+      <NumberKey
+        key={0}
+        value={0}
+        gridColumn={"1 / 4"}
+        onClick={() => handleNumKeyPress(0)}
+      >
+        {0}
+      </NumberKey>
       <ActionKey value={"+"} onClick={handleActionKeyPress} />
       <ActionKey value={"="} onClick={getResult} />
     </Grid>

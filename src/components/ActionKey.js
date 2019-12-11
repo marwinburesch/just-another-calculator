@@ -16,19 +16,19 @@ const Key = styled.button`
   }
 `;
 
-export default function ActionKey({ action, onActionKeyPress }) {
+export default function ActionKey({ value, onClick }) {
   let span = "span 1";
-  if (action === "next") {
+  if (value === "next") {
     span = "span 4";
   }
 
   function handleClick() {
-    onActionKeyPress(action);
+    onClick(value);
   }
 
   return (
     <Key span={span} onClick={handleClick}>
-      {action}
+      {value}
     </Key>
   );
 }

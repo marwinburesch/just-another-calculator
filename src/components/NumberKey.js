@@ -16,14 +16,14 @@ const Key = styled.button`
   }
 `;
 
-export default function NumberKey({ number, onNumKeyPress }) {
+export default function NumberKey({ number, onClick }) {
   let span = "span 1";
   if (number === 0) {
     span = "span 3";
   }
 
   function handleClick() {
-    onNumKeyPress(number.toString());
+    onClick(number.toString());
   }
 
   return (

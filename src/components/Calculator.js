@@ -57,22 +57,22 @@ export default function Calculator() {
 
   return (
     <Grid>
-      <Display value={result} />
-      <NumberKey number={7} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={8} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={9} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"/"} onActionKeyPress={handleActionKeyPress} />
-      <NumberKey number={4} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={5} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={6} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"x"} onActionKeyPress={handleActionKeyPress} />
-      <NumberKey number={1} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={2} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={3} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"-"} onActionKeyPress={handleActionKeyPress} />
-      <NumberKey number={0} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"+"} onActionKeyPress={handleActionKeyPress} />
-      <ActionKey action={"next"} onActionKeyPress={handleActionKeyPress} />
+      <Display>{result}</Display>
+      {[7, 8, 9].map(value => (
+        <NumberKey key={value} value={value} onClick={handleNumKeyPress} />
+      ))}
+      <ActionKey value={"/"} onClick={handleActionKeyPress} />
+      {[4, 5, 6].map(value => (
+        <NumberKey key={value} value={value} onClick={handleNumKeyPress} />
+      ))}
+      <ActionKey value={"x"} onClick={handleActionKeyPress} />
+      {[1, 2, 3].map(value => (
+        <NumberKey key={value} value={value} onClick={handleNumKeyPress} />
+      ))}
+      <ActionKey value={"-"} onClick={handleActionKeyPress} />
+      <NumberKey key={0} value={0} onClick={handleNumKeyPress} />
+      <ActionKey value={"+"} onClick={handleActionKeyPress} />
+      <ActionKey value={"next"} onClick={handleActionKeyPress} />
     </Grid>
   );
 }

@@ -16,7 +16,7 @@ const Grid = styled.div`
 `;
 
 const NumberPad = styled.div`
-  grid-column: 1/4;
+  grid-column: 1 / 4;
   grid-row: 2 / 6;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -51,7 +51,11 @@ export default function Calculator() {
   }
 
   function handleActionKeyPress(key) {
-    setOperator(key);
+    if (key === "=") {
+      getResult();
+    } else {
+      setOperator(key);
+    }
   }
 
   return (
@@ -59,7 +63,7 @@ export default function Calculator() {
       {/* display should show input,on getResult the result */}
       <Display>{result}</Display>
       <NumberPad>
-        {[7, 8, 9, 4, 5, 6, 1, 2, 3].map(value => (
+        {[7, 8, 9, 4, 5, 6, 1, 2, 3, 0].map(value => (
           <NumberKey
             key={value}
             value={value}
@@ -67,19 +71,11 @@ export default function Calculator() {
               handleNumKeyPress(value);
             }}
           >
-            {value.toString()}
+            {value}
           </NumberKey>
         ))}
-        <NumberKey
-          key={0}
-          value={0}
-          gridColumn={"1 / 4"}
-          onClick={() => handleNumKeyPress(0)}
-        >
-          {0}
-        </NumberKey>
       </NumberPad>
-      {["+", "-", "*", "/"].map(value => (
+      {["+", "-", "*", "/", "="].map(value => (
         <ActionKey
           key={value}
           value={value}
@@ -88,9 +84,6 @@ export default function Calculator() {
           {value}
         </ActionKey>
       ))}
-      <ActionKey key={"="} value={"="} gridColumn={"1/5"} onClick={getResult}>
-        {"="}
-      </ActionKey>
     </Grid>
   );
 }

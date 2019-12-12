@@ -15,6 +15,14 @@ const Grid = styled.div`
   grid-template-rows: repeat(6, 1fr);
 `;
 
+const NumberPad = styled.div`
+  grid-column: 1/4;
+  grid-row: 2 / 6;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+`;
+
 export default function Calculator() {
   const [firstNum, setFirstNum] = useState(0);
   const [secondNum, setSecondNum] = useState(0);
@@ -50,46 +58,30 @@ export default function Calculator() {
     <Grid>
       {/* display should show input,on getResult the result */}
       <Display>{result}</Display>
-      {[7, 8, 9].map(value => (
+      <NumberPad>
+        {[7, 8, 9, 4, 5, 6, 1, 2, 3].map(value => (
+          <NumberKey
+            key={value}
+            value={value}
+            onClick={() => {
+              handleNumKeyPress(value);
+            }}
+          >
+            {value.toString()}
+          </NumberKey>
+        ))}
         <NumberKey
-          key={value}
-          value={value}
-          onClick={() => {
-            handleNumKeyPress(value);
-          }}
+          key={0}
+          value={0}
+          gridColumn={"1 / 4"}
+          onClick={() => handleNumKeyPress(0)}
         >
-          {value.toString()}
+          {0}
         </NumberKey>
-      ))}
+      </NumberPad>
       <ActionKey value={"/"} onClick={handleActionKeyPress} />
-      {[4, 5, 6].map(value => (
-        <NumberKey
-          key={value}
-          value={value}
-          onClick={() => handleNumKeyPress(value)}
-        >
-          {value}
-        </NumberKey>
-      ))}
       <ActionKey value={"*"} onClick={handleActionKeyPress} />
-      {[1, 2, 3].map(value => (
-        <NumberKey
-          key={value}
-          value={value}
-          onClick={() => handleNumKeyPress(value)}
-        >
-          {value}
-        </NumberKey>
-      ))}
       <ActionKey value={"-"} onClick={handleActionKeyPress} />
-      <NumberKey
-        key={0}
-        value={0}
-        gridColumn={"1 / 4"}
-        onClick={() => handleNumKeyPress(0)}
-      >
-        {0}
-      </NumberKey>
       <ActionKey value={"+"} onClick={handleActionKeyPress} />
       <ActionKey value={"="} onClick={getResult} />
     </Grid>

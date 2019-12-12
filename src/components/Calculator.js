@@ -79,11 +79,18 @@ export default function Calculator() {
           {0}
         </NumberKey>
       </NumberPad>
-      <ActionKey value={"/"} onClick={handleActionKeyPress} />
-      <ActionKey value={"*"} onClick={handleActionKeyPress} />
-      <ActionKey value={"-"} onClick={handleActionKeyPress} />
-      <ActionKey value={"+"} onClick={handleActionKeyPress} />
-      <ActionKey value={"="} onClick={getResult} />
+      {["+", "-", "*", "/"].map(value => (
+        <ActionKey
+          key={value}
+          value={value}
+          onClick={() => handleActionKeyPress(value)}
+        >
+          {value}
+        </ActionKey>
+      ))}
+      <ActionKey key={"="} value={"="} gridColumn={"1/5"} onClick={getResult}>
+        {"="}
+      </ActionKey>
     </Grid>
   );
 }

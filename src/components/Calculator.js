@@ -4,7 +4,7 @@ import colors from "../utils/colors";
 import Display from "./Display";
 import ActionKey from "./ActionKey";
 import NumberKey from "./NumberKey";
-import { add, substract, multiply, divide } from "../api/operations";
+import calculateResult from "../api/operations";
 
 const Grid = styled.div`
   width: 400px;
@@ -15,64 +15,75 @@ const Grid = styled.div`
   grid-template-rows: repeat(6, 1fr);
 `;
 
+const NumberPad = styled.div`
+  grid-column: 1 / 4;
+  grid-row: 2 / 6;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+`;
+
 export default function Calculator() {
-  const [firstNum, setFirstNum] = useState("");
-  const [secondNum, setSecondNum] = useState("");
-  const [nextHasBeenPressed, setNextHasBeenPressed] = useState(false);
+  const [firstNum, setFirstNum] = useState(0);
+  const [secondNum, setSecondNum] = useState(0);
+  const [operator, setOperator] = useState("");
   const [result, setResult] = useState(null);
 
-  console.log(firstNum);
-  console.log(secondNum);
-  console.log(nextHasBeenPressed);
+  console.log(firstNum, operator, secondNum, result);
+
+  function getResult() {
+    setResult(calculateResult(operator, firstNum, secondNum));
+    reset();
+  }
+
+  function reset() {
+    setOperator(null);
+    setFirstNum("");
+    setSecondNum("");
+  }
 
   function handleNumKeyPress(value) {
-    if (!nextHasBeenPressed) {
-      setFirstNum(firstNum + value);
+    if (operator) {
+      setSecondNum(secondNum * 10 + value);
     } else {
-      setSecondNum(secondNum + value);
+      setFirstNum(firstNum * 10 + value);
     }
   }
 
   function handleActionKeyPress(key) {
-    switch (key) {
-      case "next":
-        setNextHasBeenPressed(true);
-        break;
-      case "+":
-        setResult(add(firstNum, secondNum));
-        break;
-      case "-":
-        setResult(substract(firstNum, secondNum));
-        break;
-      case "x":
-        setResult(multiply(firstNum, secondNum));
-        break;
-      case "/":
-        setResult(divide(firstNum, secondNum));
-        break;
-      default:
-        console.log("press keys damnit");
+    if (key === "=") {
+      getResult();
+    } else {
+      setOperator(key);
     }
   }
 
   return (
     <Grid>
-      <Display value={result} />
-      <NumberKey number={7} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={8} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={9} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"/"} onActionKeyPress={handleActionKeyPress} />
-      <NumberKey number={4} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={5} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={6} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"x"} onActionKeyPress={handleActionKeyPress} />
-      <NumberKey number={1} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={2} onNumKeyPress={handleNumKeyPress} />
-      <NumberKey number={3} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"-"} onActionKeyPress={handleActionKeyPress} />
-      <NumberKey number={0} onNumKeyPress={handleNumKeyPress} />
-      <ActionKey action={"+"} onActionKeyPress={handleActionKeyPress} />
-      <ActionKey action={"next"} onActionKeyPress={handleActionKeyPress} />
+      {/* display should show input,on getResult the result */}
+      <Display>{result}</Display>
+      <NumberPad>
+        {[7, 8, 9, 4, 5, 6, 1, 2, 3, 0].map(value => (
+          <NumberKey
+            key={value}
+            value={value}
+            onClick={() => {
+              handleNumKeyPress(value);
+            }}
+          >
+            {value}
+          </NumberKey>
+        ))}
+      </NumberPad>
+      {["+", "-", "*", "/", "="].map(value => (
+        <ActionKey
+          key={value}
+          value={value}
+          onClick={() => handleActionKeyPress(value)}
+        >
+          {value}
+        </ActionKey>
+      ))}
     </Grid>
   );
 }

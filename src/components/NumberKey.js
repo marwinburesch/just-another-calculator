@@ -1,10 +1,13 @@
-import React from "react";
 import styled from "@emotion/styled";
 import colors from "../utils/colors";
 
-const Key = styled.button`
+const gridColumn = {
+  0: "1/4"
+};
+
+const NumberKey = styled.button`
   all: unset;
-  grid-column: ${props => props.span};
+  grid-column: ${props => gridColumn[props.value]};
   background: ${colors.medium};
   box-shadow: inset -3px -3px 0 ${colors.mediumAccent};
   text-align: center;
@@ -16,19 +19,4 @@ const Key = styled.button`
   }
 `;
 
-export default function NumberKey({ number, onNumKeyPress }) {
-  let span = "span 1";
-  if (number === 0) {
-    span = "span 3";
-  }
-
-  function handleClick() {
-    onNumKeyPress(number.toString());
-  }
-
-  return (
-    <Key span={span} onClick={handleClick}>
-      {number}
-    </Key>
-  );
-}
+export default NumberKey;

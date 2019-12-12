@@ -1,10 +1,13 @@
-import React from "react";
 import styled from "@emotion/styled";
 import colors from "../utils/colors";
 
-const Key = styled.button`
+const gridColumn = {
+  "=": "1/5"
+};
+
+const ActionKey = styled.button`
   all: unset;
-  grid-column: ${props => props.span};
+  grid-column: ${props => gridColumn[props.value]};
   background: ${colors.light};
   box-shadow: inset -3px -3px 0 ${colors.lightAccent};
   text-align: center;
@@ -16,19 +19,4 @@ const Key = styled.button`
   }
 `;
 
-export default function ActionKey({ action, onActionKeyPress }) {
-  let span = "span 1";
-  if (action === "next") {
-    span = "span 4";
-  }
-
-  function handleClick() {
-    onActionKeyPress(action);
-  }
-
-  return (
-    <Key span={span} onClick={handleClick}>
-      {action}
-    </Key>
-  );
-}
+export default ActionKey;

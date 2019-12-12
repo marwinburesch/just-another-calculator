@@ -1,16 +1,27 @@
-export function add(a, b) {
-  const result = parseInt(a) + parseInt(b);
-  return result;
+function add(a, b) {
+  return a + b;
 }
-export function substract(a, b) {
-  const result = parseInt(a) - parseInt(b);
-  return result;
+function sub(a, b) {
+  return a - b;
 }
-export function multiply(a, b) {
-  const result = parseInt(a) * parseInt(b);
-  return result;
+function multi(a, b) {
+  return a * b;
 }
-export function divide(a, b) {
-  const result = parseInt(a) / parseInt(b);
-  return result;
+function div(a, b) {
+  return a / b;
+}
+
+const operatorFunctions = {
+  "+": add,
+  "-": sub,
+  "*": multi,
+  "/": div
+};
+
+export default function calculateResult(operator, a, b) {
+  const operatorFunction = operatorFunctions[operator];
+  if (!operatorFunction) {
+    throw new Error("Unknown operator" + operator);
+  }
+  return operatorFunction(a, b);
 }
